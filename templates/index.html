@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Heart Disease Predictor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f4f8;
+            margin: 0;
+            padding: 30px;
+        }
+        .form-container {
+            max-width: 550px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #d63031;
+            margin-bottom: 5px;
+        }
+        p.subtitle {
+            text-align: center;
+            color: #636e72;
+            margin-bottom: 20px;
+            font-size: 0.9em;
+        }
+        label {
+            font-weight: bold;
+            color: #2d3436;
+            font-size: 0.9em;
+        }
+        input[type="number"] {
+            width: 100%;
+            padding: 9px;
+            margin: 4px 0 14px 0;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            background: #d63031;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1em;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background: #b71c1c;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 1.1em;
+            background: #f8f9fa;
+            border-left: 5px solid #d63031;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>❤️ Heart Disease Predictor</h2>
+        <p class="subtitle">Enter patient details below to predict heart disease risk</p>
+
+        <form action="/predict" method="post">
+            <label>Age:</label>
+            <input type="number" name="age" placeholder="e.g. 55" required>
+
+            <label>Sex (1=Male, 0=Female):</label>
+            <input type="number" name="sex" min="0" max="1" placeholder="1 or 0" required>
+
+            <label>Chest Pain Type (0-3):</label>
+            <input type="number" name="cp" min="0" max="3" placeholder="0=typical angina, 3=asymptomatic" required>
+
+            <label>Resting Blood Pressure (mm Hg):</label>
+            <input type="number" name="trestbps" placeholder="e.g. 130" required>
+
+            <label>Serum Cholesterol (mg/dl):</label>
+            <input type="number" name="chol" placeholder="e.g. 250" required>
+
+            <label>Fasting Blood Sugar > 120 mg/dl (1=True, 0=False):</label>
+            <input type="number" name="fbs" min="0" max="1" placeholder="1 or 0" required>
+
+            <label>Resting ECG Results (0-2):</label>
+            <input type="number" name="restecg" min="0" max="2" placeholder="0, 1, or 2" required>
+
+            <label>Max Heart Rate Achieved:</label>
+            <input type="number" name="thalach" placeholder="e.g. 150" required>
+
+            <label>Exercise Induced Angina (1=Yes, 0=No):</label>
+            <input type="number" name="exang" min="0" max="1" placeholder="1 or 0" required>
+
+            <label>ST Depression (Oldpeak):</label>
+            <input type="number" name="oldpeak" step="0.1" placeholder="e.g. 2.3" required>
+
+            <label>Slope of Peak Exercise ST (0-2):</label>
+            <input type="number" name="slope" min="0" max="2" placeholder="0, 1, or 2" required>
+
+            <label>Number of Major Vessels (0-3):</label>
+            <input type="number" name="ca" min="0" max="3" placeholder="0 to 3" required>
+
+            <label>Thalassemia (1=Normal, 2=Fixed Defect, 3=Reversible Defect):</label>
+            <input type="number" name="thal" min="1" max="3" placeholder="1, 2, or 3" required>
+
+            <input type="submit" value="Predict">
+        </form>
+
+        {% if prediction_text %}
+        <div class="result">{{ prediction_text }}</div>
+        {% endif %}
+    </div>
+</body>
+</html>
